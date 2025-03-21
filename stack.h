@@ -1,7 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
 #define STACK_IMPLEMENTATION
 #define STACK_INIT_CAPACITY 256
 
@@ -27,7 +23,7 @@ bool stack_is_empty(stack_t* stack){
 void stack_push(stack_t* stack, int item){
     if(stack->count >= stack->capacity){
         stack->capacity *= 2;
-        stack->data = realloc(stack->data, stack->capacity * sizeof(int));
+        stack->data = (int*)realloc(stack->data, stack->capacity * sizeof(int));
     }
     
     stack->data[stack->count++] = item;
