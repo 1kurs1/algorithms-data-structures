@@ -73,6 +73,7 @@ CMakeFiles/ADS.dir/cmake_pch.h.gch: CMakeFiles/ADS.dir/cmake_pch.h \
 CMakeFiles/ADS.dir/demo.c.o: CMakeFiles/ADS.dir/cmake_pch.h \
   CMakeFiles/ADS.dir/cmake_pch.h.c \
   /home/kurs/Projects/ADS/demo.c \
+  /home/kurs/Projects/ADS/llist.h \
   /home/kurs/Projects/ADS/pch.h \
   /home/kurs/Projects/ADS/queue.h \
   /home/kurs/Projects/ADS/stack.h \
@@ -200,6 +201,8 @@ CMakeFiles/ADS.dir/cmake_pch.h.c:
 /usr/include/x86_64-linux-gnu/bits/pthreadtypes-arch.h:
 
 /usr/include/x86_64-linux-gnu/bits/types/time_t.h:
+
+/home/kurs/Projects/ADS/llist.h:
 
 /usr/include/alloca.h:
 

@@ -1,6 +1,7 @@
 #include "pch.h"
 #include "stack.h"
 #include "queue.h"
+#include "llist.h"
 
 int main(){
     #ifdef STACK_IMPLEMENTATION
@@ -44,6 +45,37 @@ int main(){
 
     // clean up:
     queue_free(queue);
+    #endif
+
+    #ifdef LINKED_LIST_IMPLEMENTATION
+    // initialization:
+    linked_list_t* list = list_alloc();
+    
+    // demonstration:
+    for (size_t i = 0; i < 10; i++) list_add(list, i);
+    printf("size of the list: %zu\n", list->count);
+    list_print(list);
+    
+    printf("removing 1: \n");
+    list_remove_value(list, 1);
+    list_print(list);
+    
+    printf("first element: %d\n", list_at(list, 0));
+    int last = list_remove_last(list);
+    printf("last element: %d\n", last);
+    printf("%d has been removed: \n", last);
+    list_print(list);
+    
+    printf("number 3 is at index %d\n", list_find(list, 3));
+    
+    printf("reversed list: \n");
+    list_reverse(list);
+    list_print(list);
+    
+    printf("number 3 is at index %d\n\n", list_find(list, 3));
+    
+    // clean up:
+    list_free(list);
     #endif
 
     return EXIT_SUCCESS;
