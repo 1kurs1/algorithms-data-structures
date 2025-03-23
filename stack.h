@@ -1,3 +1,5 @@
+#pragma once
+
 #define STACK_IMPLEMENTATION
 #define STACK_INIT_CAPACITY 256
 

@@ -63,4 +63,5 @@ CMakeFiles/ADS.dir/demo.c.o: \
   /usr/include/x86_64-linux-gnu/bits/types/locale_t.h \
   /usr/include/x86_64-linux-gnu/bits/types/__locale_t.h \
   /home/kurs/Projects/ADS/demo.c /home/kurs/Projects/ADS/stack.h \
-  /home/kurs/Projects/ADS/queue.h /home/kurs/Projects/ADS/llist.h
+  /home/kurs/Projects/ADS/queue.h /home/kurs/Projects/ADS/llist.h \
+  /home/kurs/Projects/ADS/mathematics.h

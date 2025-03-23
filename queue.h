@@ -1,3 +1,5 @@
+#pragma once
+
 #define QUEUE_IMPLEMENTATION
 #define QUEUE_INIT_CAPACITY 256
 

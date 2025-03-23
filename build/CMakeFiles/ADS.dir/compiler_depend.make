@@ -74,6 +74,7 @@ CMakeFiles/ADS.dir/demo.c.o: CMakeFiles/ADS.dir/cmake_pch.h \
   CMakeFiles/ADS.dir/cmake_pch.h.c \
   /home/kurs/Projects/ADS/demo.c \
   /home/kurs/Projects/ADS/llist.h \
+  /home/kurs/Projects/ADS/mathematics.h \
   /home/kurs/Projects/ADS/pch.h \
   /home/kurs/Projects/ADS/queue.h \
   /home/kurs/Projects/ADS/stack.h \
@@ -143,6 +144,8 @@ CMakeFiles/ADS.dir/demo.c.o: CMakeFiles/ADS.dir/cmake_pch.h \
   /usr/lib/llvm-19/lib/clang/19/include/stdbool.h \
   /usr/lib/llvm-19/lib/clang/19/include/stddef.h
 
+
+/home/kurs/Projects/ADS/mathematics.h:
 
 /home/kurs/Projects/ADS/demo.c:
 

@@ -2,6 +2,7 @@
 #include "stack.h"
 #include "queue.h"
 #include "llist.h"
+#include "mathematics.h"
 
 int main(){
     #ifdef STACK_IMPLEMENTATION
@@ -76,6 +77,15 @@ int main(){
     
     // clean up:
     list_free(list);
+    #endif
+
+    #ifdef MATH_IMPLEMENTATION
+    int a = -17, b = 6, c = 3;
+
+    printf("ABS(%d) = %d\n", a, abs(a));
+    printf("[iterative] GCD(%d, %d) = %d\n", b, c, gcd_iterative(b, c));
+    printf("[recursive] GCD(%d, %d) = %d\n", b, c, gcd_recursive(b, c));
+    printf("LCM(%d, %d) = %d\n\n", b, c, lcm(b, c));
     #endif
 
     return EXIT_SUCCESS;
