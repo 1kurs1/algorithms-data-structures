@@ -3,5 +3,5 @@ cd build
 cmake ..
 make
 clear
-./ADS
+./ADS 50 --dynamic
 cd ..

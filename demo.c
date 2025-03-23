@@ -4,7 +4,7 @@
 #include "llist.h"
 #include "mathematics.h"
 
-int main(){
+int main(int argc, char* argv[]){
     #ifdef STACK_IMPLEMENTATION
     srand(time(NULL));
     // initialize:
@@ -86,6 +86,39 @@ int main(){
     printf("[iterative] GCD(%d, %d) = %d\n", b, c, gcd_iterative(b, c));
     printf("[recursive] GCD(%d, %d) = %d\n", b, c, gcd_recursive(b, c));
     printf("LCM(%d, %d) = %d\n\n", b, c, lcm(b, c));
+
+    const char* perform_options = "[--dynamic | --memory | --recursive]";
+    if(argc < 3){
+        fprintf(stderr, "usage: %s <n> %s\n", argv[0], perform_options);
+        return EXIT_FAILURE;
+    }
+
+    uint64_t (*fibonacci)(int n);
+    int n = atoi(argv[1]);
+
+    if(n > 92){
+        fprintf(stderr, "fibonacci(%d) overflows if n is greater than 92\n", n);
+        return EXIT_FAILURE;
+    }
+
+    if(strcmp(argv[2], "--memory") == 0){
+        printf("memorized version: ");
+        fibonacci = &fibonacci_memory;
+    }
+    else if(strcmp(argv[2], "--dynamic") == 0){
+        printf("dynamic version: ");
+        fibonacci = &fibonacci_dynamic;
+    }
+    else if(strcmp(argv[2], "--recursive") == 0){
+        printf("recursive version: ");
+        fibonacci = &fibonacci_recursive;
+    }
+    else{
+        fprintf(stderr, "invalid perfomance option specified, valid options are: %s\n", perform_options);
+        return EXIT_FAILURE;
+    }
+
+    printf("fibanacci(%d) = %llu\n\n", n, fibonacci(n));
     #endif
 
     return EXIT_SUCCESS;
