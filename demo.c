@@ -3,6 +3,8 @@
 #include "queue.h"
 #include "llist.h"
 #include "mathematics.h"
+#include "hashmap.h"
+#include "sort.h"
 
 int main(int argc, char* argv[]){
     #ifdef STACK_IMPLEMENTATION
@@ -119,6 +121,42 @@ int main(int argc, char* argv[]){
     }
 
     printf("fibanacci(%d) = %llu\n\n", n, fibonacci(n));
+    #endif
+
+    #ifdef HASHMAP_IMPLEMENTATION
+    hashmap_t* map = hashmap_alloc();
+
+    const char* arr[5] = {"Apple", "Banana", "Grape", "Pineapple", "Orange"};
+    for(int i = 0; i < 5; i++) hashmap_insert(map, arr[i], i+1);
+    printf("hashmap:\n");
+    hashmap_print(map);
+    
+    printf("hashmap about grape: %d\n", hashmap_get(map, "Grape")->value);
+    printf("hashmap delete grape: \n");
+    hashmap_delete(map, "Grape");
+    hashmap_print(map);
+    printf("\n");
+
+    hashmap_free(map);
+    #endif
+
+    #ifdef SORTIONS_IMPLEMENTATION
+    int* merge_sort_arr = (int*)malloc(500 * sizeof(int));
+    int* after_sort_arr = (int*)malloc(500 * sizeof(int));
+
+    printf("array before sort: ");
+    for(int i = 0; i < 500; i++) {
+        merge_sort_arr[i] = rand()%100 + 1;
+        printf("%d ", merge_sort_arr[i]);
+    }
+    
+    printf("\nlist after merge sortion: ");
+    merge_sort(merge_sort_arr, after_sort_arr, 500);
+    for(int i = 0; i < 500; i++) printf("%d ", after_sort_arr[i]);
+    printf("\n\n");
+
+    free(merge_sort_arr);
+    free(after_sort_arr);
     #endif
 
     return EXIT_SUCCESS;

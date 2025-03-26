@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "mathematics.h": "c",
+        "stack.h": "c"
+    }
+}

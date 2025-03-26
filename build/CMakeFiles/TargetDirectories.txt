@@ -1,3 +1,0 @@
-/home/kurs/Projects/ADS/build/CMakeFiles/ADS.dir
-/home/kurs/Projects/ADS/build/CMakeFiles/edit_cache.dir
-/home/kurs/Projects/ADS/build/CMakeFiles/rebuild_cache.dir

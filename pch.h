@@ -5,4 +5,5 @@
 
 #include <string.h>
 
+#include <math.h>
 #include <time.h>
