@@ -50,3 +50,88 @@ uint64_t fibonacci_dynamic(int n){
     }
     return b;
 }
+
+typedef struct matrix{
+    size_t rows;
+    size_t columns;
+    int* data;
+} matrix_t;
+
+matrix_t* matrix_alloc(size_t rows, size_t cols){
+    matrix_t* res = (matrix_t*)malloc(sizeof(matrix_t));
+    res->rows = rows;
+    res->columns = cols;
+    res->data = (int*)malloc(res->rows*res->columns*sizeof(int));
+    return res;
+}
+
+bool matrix_is_square(matrix_t* mat){
+    return mat->rows == mat->columns;
+}
+
+int matrix_rang(matrix_t* mat){
+    if(matrix_is_square(mat)) return mat->rows;
+    return -1;
+}
+
+void matrix_multiply_scalar(matrix_t* mat, int n){
+    for(size_t i = 0; i < mat->rows; i++){
+        for(size_t j = 0; j < mat->columns; j++){
+            mat->data[i*mat->columns + j] *= n;
+        }
+    }
+}
+
+matrix_t* matrix_multiply_matrix(matrix_t* a, matrix_t* b){
+    if(a->columns != b->rows){
+        fprintf(stderr, "failed to multiply to matrices\n");
+        exit(1);
+    }
+
+    matrix_t* res = matrix_alloc(a->rows, b->columns);
+    for(size_t i = 0; i < res->rows; i++){
+        for(size_t j = 0; j < res->columns; j++){
+            res->data[i*res->columns + j] = 0;
+            for(size_t k = 0; k < a->columns; k++){
+                res->data[i*res->columns + j] += a->data[i*a->columns + k] * b->data[k*b->columns + j];
+            }
+        }
+    }
+
+    return res;
+}
+
+matrix_t* matrix_sum(matrix_t* a, matrix_t* b){
+    if(a->columns != b->columns || a->rows != b->rows){
+        fprintf(stderr, "failed to sum different by size matricies\n");
+        exit(1);
+    }
+
+    matrix_t* res = matrix_alloc(a->rows, b->columns);
+    for(size_t i = 0; i < res->rows; i++){
+        for(size_t j = 0; j < res->columns; j++)
+            res->data[i*res->columns + j] = a->data[i*res->columns + j] + b->data[i*res->columns + j];
+    }
+
+    return res;
+}
+
+matrix_t* matrix_from_array(int* arr, int rows, int cols){
+    matrix_t* res = matrix_alloc(rows, cols);
+    memcpy(res->data, arr, rows * cols * sizeof(int));
+    return res;
+}
+
+void matrix_print(matrix_t* mat){
+    for(size_t i = 0; i < mat->rows; i++){
+        for(size_t j = 0; j < mat->columns; j++){
+            printf("%d ", mat->data[i*mat->columns + j]);
+        }
+        printf("\n");
+    }
+}
+
+void matrix_free(matrix_t* mat){
+    free(mat->data);
+    free(mat);
+}

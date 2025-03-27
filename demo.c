@@ -121,6 +121,56 @@ int main(int argc, char* argv[]){
     }
 
     printf("fibanacci(%d) = %llu\n\n", n, fibonacci(n));
+
+    int mat_x[] = {
+        1, 2, 
+        3, 4,
+        5, 6
+    };
+
+    int mat_y[] = {
+        1, 10,
+        2, 13
+    };
+
+    int mat_z[] = {
+        1, 2,
+        3, 4
+    };
+
+    matrix_t* mat_a = matrix_from_array(mat_x, 3, 2);
+    matrix_t* mat_b = matrix_from_array(mat_y, 2, 2);
+    matrix_t* mat_c = matrix_from_array(mat_z, 2, 2);
+
+    printf("A:\n");
+    matrix_print(mat_a);
+    printf("B:\n");
+    matrix_print(mat_b);
+    printf("C:\n");
+    matrix_print(mat_c);
+
+    printf("matrix \'a\' rang: %d\n", matrix_rang(mat_a));
+    printf("matrix \'b\' rang: %d\n", matrix_rang(mat_b));
+    printf("matrix \'c\' rang: %d\n", matrix_rang(mat_c));
+
+    printf("matricies multiplication A x B: \n");
+    matrix_t* mat_mul = matrix_multiply_matrix(mat_a, mat_b);
+    matrix_print(mat_mul);
+    
+    printf("matricies sum B + C:\n");
+    matrix_t* mat_sum = matrix_sum(mat_b, mat_c);
+    matrix_print(mat_sum);
+
+    printf("matrix on scalar A x 2:\n");
+    matrix_multiply_scalar(mat_a, 2);
+    matrix_print(mat_a);
+    printf("\n");
+
+    matrix_free(mat_mul);
+    matrix_free(mat_sum);
+    matrix_free(mat_a);
+    matrix_free(mat_b);
+    matrix_free(mat_c);
     #endif
 
     #ifdef HASHMAP_IMPLEMENTATION
@@ -143,20 +193,28 @@ int main(int argc, char* argv[]){
     #ifdef SORTIONS_IMPLEMENTATION
     int* merge_sort_arr = (int*)malloc(500 * sizeof(int));
     int* after_sort_arr = (int*)malloc(500 * sizeof(int));
+    int* after_cocktail_shaker_sort = (int*)malloc(500 * sizeof(int));
 
     printf("array before sort: ");
     for(int i = 0; i < 500; i++) {
         merge_sort_arr[i] = rand()%100 + 1;
+        after_cocktail_shaker_sort[i] = merge_sort_arr[i];
         printf("%d ", merge_sort_arr[i]);
     }
     
     printf("\nlist after merge sortion: ");
     merge_sort(merge_sort_arr, after_sort_arr, 500);
     for(int i = 0; i < 500; i++) printf("%d ", after_sort_arr[i]);
+    printf("\n");
+
+    printf("\nlist after cocktail-shaker sortion: ");
+    cocktail_shaker(after_cocktail_shaker_sort, 500);
+    for(int i = 0; i < 500; i++) printf("%d ", after_cocktail_shaker_sort[i]);
     printf("\n\n");
 
     free(merge_sort_arr);
     free(after_sort_arr);
+    free(after_cocktail_shaker_sort);
     #endif
 
     return EXIT_SUCCESS;

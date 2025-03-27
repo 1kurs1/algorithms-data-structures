@@ -33,3 +33,35 @@ void merge_sort(int* a, int* b, int n){
 
     if(src != a) memcpy(a, src, n * sizeof(int));
 }
+
+void swap(int* a, int* b){
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+
+void cocktail_shaker(int* arr, int n){
+    bool swapped = true;
+    int begin = 0;
+    int end = n-1;
+
+    while(swapped){
+        swapped = false;
+
+        for(size_t i = begin; i < end; i++){
+            if(arr[i] > arr[i+1]){
+                swap(&arr[i], &arr[i+1]);
+                swapped = true;
+            }
+        }
+        end--;
+
+        for(size_t i = end; i > begin; i--){
+            if(arr[i-1] > arr[i]){
+                swap(&arr[i-1], &arr[i]);
+                swapped = true;
+            }
+        }
+        begin++;
+    }
+}
