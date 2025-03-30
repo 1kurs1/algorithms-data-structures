@@ -5,6 +5,7 @@
 #include "mathematics.h"
 #include "hashmap.h"
 #include "sort.h"
+#include "graph.h"
 
 int main(int argc, char* argv[]){
     #ifdef STACK_IMPLEMENTATION
@@ -215,6 +216,27 @@ int main(int argc, char* argv[]){
     free(merge_sort_arr);
     free(after_sort_arr);
     free(after_cocktail_shaker_sort);
+    #endif
+
+    #ifdef GRAPH_IMPLEMENTATION
+    graph_t* g = graph_alloc(5);
+
+    graph_add_edge(g, 0, 1);
+    graph_add_edge(g, 0, 2);
+    graph_add_edge(g, 1, 3);
+    graph_add_edge(g, 2, 4);
+    graph_add_edge(g, 3, 4);
+
+    graph_print(g);
+
+    printf("has (0, 2) edge ? %s", graph_has_edge(g, 0, 2) ? "yes" : "no");
+    graph_remove_edge(g, 0, 2);
+    printf("has (0, 2) edge ? %s", graph_has_edge(g, 0, 2) ? "yes" : "no");
+    
+    graph_print(g);
+    printf("\n");
+
+    graph_free(g);
     #endif
 
     return EXIT_SUCCESS;

@@ -1,6 +1,7 @@
 #pragma once
 
 #define MATH_IMPLEMENTATION
+#define matrix_at(matrix, i, j) ((matrix)->data[j * (matrix)->columns + i])
 
 int abs(int n){
     return n > 0 ? n : -n;
@@ -61,7 +62,7 @@ matrix_t* matrix_alloc(size_t rows, size_t cols){
     matrix_t* res = (matrix_t*)malloc(sizeof(matrix_t));
     res->rows = rows;
     res->columns = cols;
-    res->data = (int*)malloc(res->rows*res->columns*sizeof(int));
+    res->data = calloc(res->rows*res->columns, sizeof(int));
     return res;
 }
 
