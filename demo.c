@@ -6,6 +6,7 @@
 #include "hashmap.h"
 #include "sort.h"
 #include "graph.h"
+#include "bst.h"
 
 int main(int argc, char* argv[]){
     #ifdef STACK_IMPLEMENTATION
@@ -237,6 +238,40 @@ int main(int argc, char* argv[]){
     printf("\n");
 
     graph_free(g);
+    #endif
+
+    #ifdef BINARY_SEARCH_TREE_IMPLEMENTATION
+    bst_node_t* bst_root = NULL;
+
+    for(int i = 0; i < 7; i++)
+        bst_root = bst_node_insert(bst_root, rand()%10+1);
+
+    printf("binary search tree arity: %d\n", bst_arity(bst_root));
+    printf("binary search tree height: %d\n", bst_height(bst_root));
+
+    bst_node_delete(bst_root, 3);
+    printf("bst after delete 3\n");
+
+    printf("binary search tree arity: %d\n", bst_arity(bst_root));
+    printf("binary search tree height: %d\n", bst_height(bst_root));
+
+    printf("BFS: ");
+    breadth_first_search(bst_root);
+    printf("\n");
+
+    printf("postorder traversal: ");
+    bst_postorder_traversal(bst_root);
+    printf("\n");
+
+    printf("preorder traversal: ");
+    bst_preorder_traversal(bst_root);
+    printf("\n");
+
+    printf("inorder traversal: ");
+    bst_inorder_traversal(bst_root);
+    printf("\n\n");
+
+    bst_node_free(bst_root);
     #endif
 
     return EXIT_SUCCESS;
