@@ -7,6 +7,7 @@
 #include "sort.h"
 #include "graph.h"
 #include "bst.h"
+#include "avl.h"
 
 int main(int argc, char* argv[]){
     #ifdef STACK_IMPLEMENTATION
@@ -272,6 +273,40 @@ int main(int argc, char* argv[]){
     printf("\n\n");
 
     bst_node_free(bst_root);
+    #endif
+
+    #ifdef AVL_TREE_IMPLEMENTATION
+    avl_node_t* avl_node = nullptr;
+    avl_node = avl_insert(avl_node, 4);
+    avl_node = avl_insert(avl_node, 2);
+    avl_node = avl_insert(avl_node, 27);
+    avl_node = avl_insert(avl_node, 34);
+    avl_node = avl_insert(avl_node, 97);
+    avl_node = avl_insert(avl_node, 8);
+    avl_node = avl_insert(avl_node, 65);
+    avl_node = avl_insert(avl_node, 43);
+    
+    printf("avl height: %d\n", avl_get_height(avl_node));
+    avl_node = avl_delete(avl_node, 27);
+    printf("avl height after deletion \'27\': %d\n", avl_get_height(avl_node));
+
+    printf("avl bfs: \n");
+    avl_breadth_first_search(avl_node);
+    printf("\n");
+
+    printf("avl postorder traversal: \n");
+    avl_postorder_traversal(avl_node);
+    printf("\n");
+
+    printf("avl preorder traversal: \n");
+    avl_preorder_traversal(avl_node);
+    printf("\n");
+
+    printf("avl inorder traversal: \n");
+    avl_inorder_traversal(avl_node);
+    printf("\n");
+
+    avl_free(avl_node);
     #endif
 
     return EXIT_SUCCESS;

@@ -7,3 +7,5 @@
 
 #include <math.h>
 #include <time.h>
+
+#define nullptr 0x0

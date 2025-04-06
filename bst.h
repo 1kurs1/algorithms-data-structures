@@ -2,10 +2,6 @@
 
 #define BINARY_SEARCH_TREE_IMPLEMENTATION
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <stdbool.h>
-
 #define QUEUE_BST_INIT_CAP 256
 #define QUEUE_BST_IMPLEMENTATION
 
