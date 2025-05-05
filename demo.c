@@ -167,6 +167,33 @@ int main(int argc, char* argv[]){
     printf("matrix on scalar A x 2:\n");
     matrix_multiply_scalar(mat_a, 2);
     matrix_print(mat_a);
+
+    int mat_arr1[] = {
+        4, 2,
+        1, 7
+    };
+
+    int mat_arr2[] = {
+        5, 3,
+        6, 1
+    };
+
+    matrix_t* mat_d = matrix_from_array(mat_arr1, 2, 2);
+    matrix_t* mat_e = matrix_from_array(mat_arr2, 2, 2);
+
+    printf("mat D:\n");
+    matrix_print(mat_d);
+    printf("mat E:\n");
+    matrix_print(mat_e);
+
+    printf("D x E (in place):\n");
+    matrix_multiply_in_place(mat_d, mat_e);
+    matrix_print(mat_d);
+    
+    printf("D^4:\n");
+    matrix_t* mat_exp = matrix_exponent(mat_d, 4);
+    matrix_print(mat_exp);
+
     printf("\n");
 
     matrix_free(mat_mul);
@@ -174,6 +201,9 @@ int main(int argc, char* argv[]){
     matrix_free(mat_a);
     matrix_free(mat_b);
     matrix_free(mat_c);
+    matrix_free(mat_d);
+    matrix_free(mat_e);
+    matrix_free(mat_exp);
     #endif
 
     #ifdef HASHMAP_IMPLEMENTATION
@@ -221,22 +251,30 @@ int main(int argc, char* argv[]){
     #endif
 
     #ifdef GRAPH_IMPLEMENTATION
-    graph_t* g = graph_alloc(5);
+    graph_t* g = graph_alloc(6);
 
     graph_add_edge(g, 0, 1);
-    graph_add_edge(g, 0, 2);
-    graph_add_edge(g, 1, 3);
+    graph_add_edge(g, 0, 4);
+
+    graph_add_edge(g, 1, 2);
+    graph_add_edge(g, 1, 4);
+
+    graph_add_edge(g, 2, 3);
     graph_add_edge(g, 2, 4);
+    graph_add_edge(g, 2, 5);
+
     graph_add_edge(g, 3, 4);
+    graph_add_edge(g, 3, 5);
+
+    graph_add_edge(g, 4, 5);
 
     graph_print(g);
 
-    printf("has (0, 2) edge ? %s", graph_has_edge(g, 0, 2) ? "yes" : "no");
-    graph_remove_edge(g, 0, 2);
-    printf("has (0, 2) edge ? %s", graph_has_edge(g, 0, 2) ? "yes" : "no");
-    
-    graph_print(g);
-    printf("\n");
+    printf("BFS:\n");
+    graph_bsf(g, 0);
+
+    printf("DFS:\n");
+    graph_dfs(g, 0);
 
     graph_free(g);
     #endif

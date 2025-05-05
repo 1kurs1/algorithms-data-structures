@@ -110,6 +110,60 @@ matrix_t* matrix_multiply_matrix(matrix_t* a, matrix_t* b){
     return res;
 }
 
+void matrix_multiply_in_place(matrix_t* a, matrix_t* b){
+    if(!matrix_is_square(a) || !matrix_is_square(b) || a->rows != b->rows){
+        fprintf(stderr, "error: wrong dimenions!\n");
+        exit(1);
+    }
+
+    size_t n = a->rows;
+    int tmp[n][n];
+
+    for(size_t i = 0; i < a->rows; i++){
+        for(size_t j = 0; j < a->columns; j++){
+            tmp[i][j] = 0;
+            for(size_t k = 0; k < n; k++)
+                tmp[i][j] += matrix_at(a, k, j) * matrix_at(b, i, k);
+        }
+    }
+
+    for(size_t i = 0; i < a->rows; i++){
+        for(size_t j = 0; j < a->columns; j++){
+            matrix_at(a, i, j) = tmp[i][j];
+        }
+    }
+}
+
+matrix_t* matrix_identity(size_t size){
+    matrix_t* res = matrix_alloc(size, size);
+    for(size_t i = 0; i < res->rows; i++){
+        for(size_t j = 0; j < res->columns; j++){
+            if(i == j) matrix_at(res, i, j) = 1;
+            else matrix_at(res, i, j) = 0;
+        }
+    }
+    return res;
+}
+
+matrix_t* matrix_exponent(matrix_t* mat, int n){
+    if(n < 0){
+        fprintf(stderr, "exponent must be  >= 0\n");
+        exit(1);
+    }
+
+    matrix_t* res = matrix_identity(mat->columns);
+
+    if(n == 0) return res;
+
+    while(n){
+        if(n & 1) matrix_multiply_in_place(res, mat);
+        matrix_multiply_in_place(mat, mat);
+        n>>=1;
+    }
+
+    return res;
+}
+
 matrix_t* matrix_sum(matrix_t* a, matrix_t* b){
     if(a->columns != b->columns || a->rows != b->rows){
         fprintf(stderr, "failed to sum different by size matricies\n");
