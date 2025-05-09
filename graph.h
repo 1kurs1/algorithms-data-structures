@@ -77,9 +77,72 @@ void graph_dfs(graph_t* g, int start){
     free(visited);
 }
 
+int graph_dijkstra_min(int* dist, bool* visited, int n){
+    int min = INT_MAX;
+    int node = -1;
+
+    for (size_t i = 0; i < n; i++){
+        if (dist[i] < min && !visited[i]){
+            min = dist[i];
+            node = i;
+        }
+    }
+    return node;
+}
+
 bool graph_has_edge(graph_t* g, size_t u, size_t v){
     if(u >= g->size || v >= g->size) return false;
     return matrix_at(g->nodes, u, v) == 1;
+}
+
+void graph_dijkstra(graph_t* g, char start, char end){
+    int n = g->size;
+    int dist[n];
+    int prev[n];
+    bool visited[n];
+    char orig_start = start;
+    char orig_end = end;
+
+    start -= 65;
+    end -= 65;
+
+    for (size_t i = 0; i < g->nodes->columns; i++){
+        dist[i] = INT_MAX;
+        prev[i] = -1;
+        visited[i] = false;
+    }
+    dist[start] = 0;
+
+    for (size_t count = 0; count < n; count++){
+        int u = graph_dijkstra_min(dist, visited, n);
+        if (u == -1 || u == end) break;
+        visited[u] = true;
+
+        for (size_t v = 0; v < n; v++){
+            int weight = matrix_at(g->nodes, u, v);
+            if (!visited[v] && graph_has_edge(g, u + 65, v + 65) && dist[u] != INT_MAX && dist[u] + weight < dist[v]){
+                dist[v] = dist[u] + weight;
+                prev[v] = u;
+            }
+        }
+    }
+
+    if (dist[end] == INT_MAX){
+        printf("no path from %c to %c\n", orig_start, orig_end);
+        return;
+    }
+
+    printf("shortest path from %c to %c:\n", orig_start, orig_end);
+    int path[n];
+    int count = 0;
+    for (int at = end; at != -1; at = prev[at])
+        path[count++] = at;
+    printf("ok\n");
+
+    for (int i = count - 1; i >= 0; i--)
+        printf("%c%s", path[i] + 65, i == 0 ? "\n" : " -> ");
+
+    printf("cost: %d\n", dist[end]);
 }
 
 void graph_free(graph_t* g){

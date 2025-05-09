@@ -8,4 +8,6 @@
 #include <math.h>
 #include <time.h>
 
+#include <limits.h>
+
 #define nullptr 0x0

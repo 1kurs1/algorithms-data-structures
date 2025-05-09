@@ -248,6 +248,15 @@ int main(int argc, char* argv[]){
     free(merge_sort_arr);
     free(after_sort_arr);
     free(after_cocktail_shaker_sort);
+
+    printf("heapsort:\n");
+
+    int heap[500];
+    for(size_t i = 0; i < 500; i++) heap[i] = rand() % 100 + 1;
+
+    heapsort(heap, 500);
+    for(size_t i = 0; i < 500; i++) printf("%d ", heap[i]);
+    printf("\n");
     #endif
 
     #ifdef GRAPH_IMPLEMENTATION
@@ -269,6 +278,32 @@ int main(int argc, char* argv[]){
     graph_add_edge(g, 4, 5);
 
     graph_print(g);
+
+    // graph_t* graph_g = graph_alloc(8);
+
+    // graph_add_edge(graph_g, 'A', 'B');
+    // graph_add_edge(graph_g, 'A', 'E');
+    // graph_add_edge(graph_g, 'A', 'F');
+
+    // graph_add_edge(graph_g, 'C', 'E');
+
+    // graph_add_edge(graph_g, 'D', 'E');
+    // graph_add_edge(graph_g, 'D', 'F');
+    // graph_add_edge(graph_g, 'D', 'H');
+    // graph_add_edge(graph_g, 'F', 'G');
+
+    // graph_add_edge(graph_g, 'G', 'H');
+
+    // graph_print(graph_g);
+
+    // printf("------dijkstra------\n");
+    // graph_dijkstra(g, 'A', 'C');
+    // graph_dijkstra(g, 'A', 'B');
+    // graph_dijkstra(g, 'F', 'B');
+    // graph_dijkstra(g, 'H', 'A');
+    // graph_dijkstra(g, 'E', 'H');
+
+    // graph_free(g);
 
     printf("BFS:\n");
     graph_bsf(g, 0);
